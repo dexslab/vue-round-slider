@@ -30,6 +30,7 @@
     "module": "dist/vue-roundslider.esm.js",
     "unpkg": "dist/vue-roundslider.min.js",
     "jsdelivr": "dist/vue-roundslider.min.js",
+    "types": "dist/index.d.ts",
     "browser": {
         "./sfc": "src/round-slider.vue"
     },
