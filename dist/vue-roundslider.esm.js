@@ -2,7 +2,7 @@
 * vue-round-slider v1.0.1
 *
 * @website https://vue.roundsliderui.com/
-* @copyright (c) 2020 Soundar
+* @copyright (c) 2023 Soundar
 * @license MIT
 */
 
@@ -19,257 +19,263 @@ var roundslider_min = createCommonjsModule(function (module, exports) {
 
 //
 
-var script = {
-  name: 'RoundSlider',
+    var script = {
+        name: "RoundSlider",
 
-  props: {
-    // Basic props (frequently used)
-    min: {
-      type: [String, Number],
-      default: 0
-    },
-    max: {
-      type: [String, Number],
-      default: 100
-    },
-    step: {
-      type: [String, Number],
-      default: 1
-    },
-    value: {
-      type: [String, Number],
-      default: null
-    },
-    radius: {
-      type: [String, Number],
-      default: 105
-    },
-    width: {
-      type: [String, Number],
-      default: 20
-    },
-    lineCap: {
-      type: String,
-      default: "butt",
-      validator: function validator(cap) {
-        return validateProp('lineCap', cap);
-      },
-    },
-    startAngle: {
-      type: [String, Number],
-      default: 0
-    },
-    endAngle: {
-      type: [String, Number],
-      default: "+360"
-    },
+        props: {
+            // Basic props (frequently used)
+            min: {
+                type: [String, Number],
+                default: 0,
+            },
+            max: {
+                type: [String, Number],
+                default: 100,
+            },
+            step: {
+                type: [String, Number],
+                default: 1,
+            },
+            value: {
+                type: [String, Number],
+                default: null,
+            },
+            radius: {
+                type: [String, Number],
+                default: 105,
+            },
+            width: {
+                type: [String, Number],
+                default: 20,
+            },
+            lineCap: {
+                type: String,
+                default: "butt",
+                validator: function validator(cap) {
+                    return validateProp("lineCap", cap);
+                },
+            },
+            startAngle: {
+                type: [String, Number],
+                default: 0,
+            },
+            endAngle: {
+                type: [String, Number],
+                default: "+360",
+            },
 
-    // UI appearance related props
-    borderWidth: {
-      type: [String, Number],
-      default: 0
-    },
-    borderColor: {
-      type: String,
-      default: "inherit"
-    },
-    pathColor: {
-      type: String,
-      default: "#EEE"
-    },
-    rangeColor: {
-      type: String,
-      default: "#69F"
-    },
-    tooltipColor: {
-      type: String,
-      default: "inherit"
-    },
+            // UI appearance related props
+            borderWidth: {
+                type: [String, Number],
+                default: 0,
+            },
+            borderColor: {
+                type: String,
+                default: "inherit",
+            },
+            pathColor: {
+                type: String,
+                default: "#EEE",
+            },
+            rangeColor: {
+                type: String,
+                default: "#69F",
+            },
+            tooltipColor: {
+                type: String,
+                default: "inherit",
+            },
 
-    // Behaviour related props
-    sliderType: {
-      type: String,
-      default: "min-range",
-      validator: function validator(type) {
-        return validateProp('sliderType', type);
-      },
-    },
-    circleShape: {
-      type: String,
-      default: "full",
-      validator: function validator(shape) {
-        return validateProp('circleShape', shape);
-      },
-    },
-    animation: {
-      type: [String, Boolean],
-      default: true
-    },
-    readOnly: {
-      type: [String, Boolean],
-      default: false
-    },
-    disabled: {
-      type: [String, Boolean],
-      default: false
-    },
+            // Behaviour related props
+            sliderType: {
+                type: String,
+                default: "min-range",
+                validator: function validator(type) {
+                    return validateProp("sliderType", type);
+                },
+            },
+            circleShape: {
+                type: String,
+                default: "full",
+                validator: function validator(shape) {
+                    return validateProp("circleShape", shape);
+                },
+            },
+            animation: {
+                type: [String, Boolean],
+                default: true,
+            },
+            readOnly: {
+                type: [String, Boolean],
+                default: false,
+            },
+            disabled: {
+                type: [String, Boolean],
+                default: false,
+            },
 
-    // Miscellaneous
-    handleSize: {
-      type: [String, Number],
-      default: "+0"
-    },
-    handleShape: {
-      type: String,
-      default: "round",
-      validator: function validator(shape) {
-        return validateProp('handleShape', shape);
-      },
-    },
-    showTooltip: {
-      type: [String, Boolean],
-      default: true
-    },
-    editableTooltip: {
-      type: [String, Boolean],
-      default: true
-    },
-    keyboardAction: {
-      type: [String, Boolean],
-      default: true
-    },
-    mouseScrollAction: {
-      type: [String, Boolean],
-      default: false
-    },
+            // Miscellaneous
+            handleSize: {
+                type: [String, Number],
+                default: "+0",
+            },
+            handleShape: {
+                type: String,
+                default: "round",
+                validator: function validator(shape) {
+                    return validateProp("handleShape", shape);
+                },
+            },
+            showTooltip: {
+                type: [String, Boolean],
+                default: true,
+            },
+            editableTooltip: {
+                type: [String, Boolean],
+                default: true,
+            },
+            keyboardAction: {
+                type: [String, Boolean],
+                default: true,
+            },
+            mouseScrollAction: {
+                type: [String, Boolean],
+                default: false,
+            },
 
-    // Usecase related props
-    startValue: {
-      type: [String, Number],
-      default: null
-    },
+            // Usecase related props
+            startValue: {
+                type: [String, Number],
+                default: null,
+            },
 
-    // Events
-    create: {
-      type: Function,
-      default: null,
-    },
-    beforeValueChange: {
-      type: Function,
-      default: null,
-    },
-    change: {
-      type: Function,
-      default: null,
-    },
-    update: {
-      type: Function,
-      default: null,
-    },
-    valueChange: {
-      type: Function,
-      default: null,
-    },
-    tooltipFormat: {
-      type: Function,
-      default: null,
-    }
-  },
+            // Events
+            create: {
+                type: Function,
+                default: null,
+            },
+            beforeValueChange: {
+                type: Function,
+                default: null,
+            },
+            change: {
+                type: Function,
+                default: null,
+            },
+            update: {
+                type: Function,
+                default: null,
+            },
+            valueChange: {
+                type: Function,
+                default: null,
+            },
+            tooltipFormat: {
+                type: Function,
+                default: null,
+            },
+        },
 
-  computed: {
-    control: function control() {
-      return jquery(this.$el);
-    },
+        computed: {
+            control: function control() {
+                return jquery(this.$el);
+            },
 
-    instance: function instance() {
-      return this.control.data('roundSlider');
-    },
+            instance: function instance() {
+                return this.control.data("roundSlider");
+            },
 
-    allProps: function allProps() {
-      var this$1 = this;
+            allProps: function allProps() {
+                var this$1 = this;
 
-      if (this.$props) {
-        return this.$props;
-      }
-      // for the vue lower versions
-      var keys = Object.keys(this.$options.props);
-      var props = keys.reduce(function (propsObj, key) {
-        var obj = {};
-        obj[key] = this$1[key];
-        return Object.assign(propsObj, obj);
-      }, {});
-      return props;
-    }
-  },
+                if (this.$props) {
+                    return this.$props;
+                }
+                // for the vue lower versions
+                var keys = Object.keys(this.$options.props);
+                var props = keys.reduce(function (propsObj, key) {
+                    var obj = {};
+                    obj[key] = this$1[key];
+                    return Object.assign(propsObj, obj);
+                }, {});
+                return props;
+            },
+        },
 
-  mounted: function mounted() {
-    var this$1 = this;
+        mounted: function mounted() {
+            var this$1 = this;
 
-    // below are the default props to overwrite from base roundSlider
-    var defaultProps = {
-      svgMode: true
+            // below are the default props to overwrite from base roundSlider
+            var defaultProps = {
+                svgMode: true,
+            };
+            // merge the actual props witht the default props then initialize the component
+            var options = Object.assign(defaultProps, this.allProps);
+
+            this.control.roundSlider(options).on("update", function (ref) {
+                var value = ref.value;
+
+                this$1.$emit("input", value);
+            });
+
+            // all the props from round-slider will support the one-way data binding
+            // so, watch all the props for the changes to reflect in the component
+            this.watchProps();
+        },
+
+        destroyed: function destroyed() {
+            this.control.roundSlider("destroy");
+        },
+
+        methods: {
+            watchProps: function watchProps() {
+                var this$1 = this;
+
+                // whenever the prop changed, update the prop with the base 'roundSlider' component
+                var props = Object.keys(this.allProps);
+                props.forEach(function (prop) {
+                    this$1.$watch(prop, function (value) {
+                        this$1.updateProp(prop, value);
+                    });
+                }, this);
+            },
+
+            updateProp: function updateProp(prop, value) {
+                this.instance.option(prop, value);
+            },
+        },
     };
-    // merge the actual props witht the default props then initialize the component
-    var options = Object.assign(defaultProps, this.allProps);
 
-    this.control
-      .roundSlider(options)
-      .on("update", function (ref) {
-        var value = ref.value;
+    // the possible values for the string type props
+    // #: later this can be imported from the base roundSlider
+    var possibleValues = {
+        lineCap: ["butt", "round", "square", "none"],
+        sliderType: ["min-range", "range", "default"],
+        circleShape: [
+            "full",
+            "pie",
+            "half-top",
+            "half-bottom",
+            "half-left",
+            "half-right",
+            "quarter-top-left",
+            "quarter-top-right",
+            "quarter-bottom-right",
+            "quarter-bottom-left" ],
+        handleShape: ["round", "square", "dot"],
+    };
 
-        this$1.$emit('input', value);
-      });
-
-    // all the props from round-slider will support the one-way data binding
-    // so, watch all the props for the changes to reflect in the component
-    this.watchProps();
-  },
-
-  destroyed: function destroyed() {
-    this.control.roundSlider("destroy");
-  },
-
-  methods: {
-    watchProps: function watchProps() {
-      var this$1 = this;
-
-      // whenever the prop changed, update the prop with the base 'roundSlider' component
-      var props = Object.keys(this.allProps);
-      props.forEach(function (prop) {
-        this$1.$watch(prop, function (value) {
-          this$1.updateProp(prop, value);
-        });
-      }, this);
-    },
-
-    updateProp: function updateProp(prop, value) {
-      this.instance.option(prop, value);
-    },
-  }
-  
-};
-
-// the possible values for the string type props
-// #: later this can be imported from the base roundSlider
-var possibleValues = {
-  lineCap: ['butt', 'round', 'square', 'none'],
-  sliderType: ['min-range', 'range', 'default'],
-  circleShape: [
-    "full", "pie", "half-top", "half-bottom", "half-left", "half-right",
-    "quarter-top-left", "quarter-top-right", "quarter-bottom-right", "quarter-bottom-left"
-  ],
-  handleShape: ["round", "square", "dot"]
-};
-
-var validateProp = function (prop, value) {
-  var allValues = possibleValues[prop];
-  if (allValues.indexOf(value) === -1) {
-    var msg = "custom validator check failed for prop \"" + prop + "\" with value \"" + value + "\"";
-    var info = "\n\n---> The possible values are \n\t\t* " + (allValues.join('\n\t\t* ')) + "\n\n";
-    console.error(("[Vue warn]: Invalid prop: " + msg + info));
-  }
-  return true;
-};
+    var validateProp = function (prop, value) {
+        var allValues = possibleValues[prop];
+        if (allValues.indexOf(value) === -1) {
+            var msg = "custom validator check failed for prop \"" + prop + "\" with value \"" + value + "\"";
+            var info = "\n\n---> The possible values are \n\t\t* " + (allValues.join(
+                "\n\t\t* "
+            )) + "\n\n";
+            console.error("[Vue warn]: Invalid prop: " + msg + info);
+        }
+        return true;
+    };
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
     if (typeof shadowMode !== 'boolean') {
@@ -409,8 +415,8 @@ var __vue_staticRenderFns__ = [];
   /* style */
   var __vue_inject_styles__ = function (inject) {
     if (!inject) { return }
-    inject("data-v-340fcb96_0", { source: "/*! roundSlider v1.6.1 | (c) 2015-2020, Soundar | MIT license | http://roundsliderui.com/licence.html */.rs-edge,.rs-handle,.rs-ie{-ms-touch-action:none;touch-action:none}.rs-control{position:relative;outline:0 none}.rs-container{position:relative}.rs-control *,.rs-control :after,.rs-control :before{-webkit-box-sizing:border-box;box-sizing:border-box}.rs-animation .rs-transition{transition:all .5s linear 0s}.rs-bar{-webkit-transform-origin:100% 50%;-ms-transform-origin:100% 50%;transform-origin:100% 50%}.rs-control .rs-overlay1,.rs-control .rs-overlay2,.rs-control .rs-split .rs-path{-webkit-transform-origin:50% 100%;-ms-transform-origin:50% 100%;transform-origin:50% 100%}.rs-control .rs-overlay{-webkit-transform-origin:100% 100%;-ms-transform-origin:100% 100%;transform-origin:100% 100%}.rs-rounded .rs-seperator,.rs-split .rs-path{-webkit-background-clip:padding-box;background-clip:padding-box}.rs-disabled{opacity:.35}.rs-inner-container{height:100%;width:100%;position:absolute;top:0;overflow:hidden}.rs-control .rs-quarter div.rs-block{height:200%;width:200%}.rs-control .rs-half.rs-bottom div.rs-block,.rs-control .rs-half.rs-top div.rs-block{height:200%;width:100%}.rs-control .rs-half.rs-left div.rs-block,.rs-control .rs-half.rs-right div.rs-block{height:100%;width:200%}.rs-control .rs-bottom .rs-block{top:auto;bottom:0}.rs-control .rs-right .rs-block{right:0}.rs-block.rs-outer{border-radius:1000px}.rs-block{height:100%;width:100%;display:block;position:absolute;top:0;overflow:hidden;z-index:3}.rs-block .rs-inner{border-radius:1000px;display:block;height:100%;width:100%;position:relative}.rs-overlay{width:50%}.rs-overlay1,.rs-overlay2{width:100%}.rs-overlay,.rs-overlay1,.rs-overlay2{position:absolute;background-color:#fff;z-index:3;top:0;height:50%}.rs-bar{display:block;position:absolute;bottom:0;height:0;z-index:10}.rs-bar.rs-rounded{z-index:5}.rs-bar .rs-seperator{height:0;display:block;float:left}.rs-bar:not(.rs-rounded) .rs-seperator{border-left:none;border-right:none}.rs-bar.rs-start .rs-seperator{border-top:none}.rs-bar.rs-end .rs-seperator{border-bottom:none}.rs-bar.rs-start.rs-rounded .rs-seperator{border-radius:0 0 1000px 1000px}.rs-bar.rs-end.rs-rounded .rs-seperator{border-radius:1000px 1000px 0 0}.rs-full .rs-bar,.rs-half .rs-bar{width:50%}.rs-half.rs-left .rs-bar,.rs-half.rs-right .rs-bar,.rs-quarter .rs-bar{width:100%}.rs-full .rs-bar,.rs-half.rs-left .rs-bar,.rs-half.rs-right .rs-bar{top:50%}.rs-bottom .rs-bar{top:0}.rs-half.rs-right .rs-bar,.rs-quarter.rs-right .rs-bar{right:100%}.rs-handle.rs-move{cursor:move}.rs-readonly .rs-handle.rs-move{cursor:default}.rs-classic-mode .rs-path{display:block;height:100%;width:100%}.rs-split .rs-path{border-radius:1000px 1000px 0 0;overflow:hidden;height:50%;position:absolute;top:0;z-index:2}.rs-control .rs-svg-container{display:block;position:absolute;top:0}.rs-control .rs-bottom .rs-svg-container{top:auto;bottom:0}.rs-control .rs-right .rs-svg-container{right:0}.rs-tooltip{position:absolute;cursor:default;border:1px solid transparent;z-index:10}.rs-full .rs-tooltip{top:50%;left:50%}.rs-bottom .rs-tooltip{top:0}.rs-top .rs-tooltip{bottom:0}.rs-right .rs-tooltip{left:0}.rs-left .rs-tooltip{right:0}.rs-half.rs-bottom .rs-tooltip,.rs-half.rs-top .rs-tooltip{left:50%}.rs-half.rs-left .rs-tooltip,.rs-half.rs-right .rs-tooltip{top:50%}.rs-tooltip .rs-input{outline:0 none;border:none;background:0 0}.rs-tooltip-text{font-family:verdana;font-size:13px;border-radius:7px;text-align:center;color:inherit}.rs-tooltip.rs-edit{padding:5px 8px}.rs-tooltip.rs-edit:hover,.rs-tooltip.rs-hover{border:1px solid #aaa;cursor:pointer}.rs-readonly .rs-tooltip.rs-edit:hover{border-color:transparent;cursor:default}.rs-tooltip.rs-center{margin:0!important}.rs-half.rs-bottom .rs-tooltip.rs-center,.rs-half.rs-top .rs-tooltip.rs-center{transform:translate(-50%,0)}.rs-half.rs-left .rs-tooltip.rs-center,.rs-half.rs-right .rs-tooltip.rs-center{transform:translate(0,-50%)}.rs-full .rs-tooltip.rs-center{transform:translate(-50%,-50%)}.rs-tooltip.rs-reset{margin:0!important;top:0!important;left:0!important}.rs-handle{border-radius:1000px;outline:0 none;float:left}.rs-handle.rs-handle-square{border-radius:0}.rs-handle-dot{border:1px solid #aaa;padding:6px}.rs-handle-dot:after{display:block;content:\"\";border:1px solid #aaa;height:100%;width:100%;border-radius:1000px}.rs-seperator{border:1px solid #aaa}.rs-border{border:1px solid #aaa}.rs-path-color{background-color:#fff}.rs-range-color{background-color:#54bbe0}.rs-bg-color{background-color:#fff}.rs-handle{background-color:#838383}.rs-handle-dot{background-color:#fff}.rs-handle-dot:after{background-color:#838383}.rs-path-inherited .rs-path{opacity:.2}.rs-svg-mode .rs-path{stroke:#fff}.rs-svg-mode .rs-range{stroke:#54bbe0}.rs-svg-mode .rs-border{stroke:#aaa}", map: undefined, media: undefined })
-,inject("data-v-340fcb96_1", { source: ".rs-handle{background-color:#f3f3f3;box-shadow:0 0 4px 0 #000}.rs-tooltip-text{font-size:26px;font-weight:500;font-family:Avenir,Tahoma,Verdana,sans-serif}.rs-animation .rs-transition{transition:all .5s ease-in-out 0s}.rs-tooltip.rs-edit:hover,.rs-tooltip.rs-hover{border:1px solid #cacaca}", map: undefined, media: undefined });
+    inject("data-v-55b9423d_0", { source: "/*! roundSlider v1.6.1 | (c) 2015-2020, Soundar | MIT license | http://roundsliderui.com/licence.html */.rs-edge,.rs-handle,.rs-ie{-ms-touch-action:none;touch-action:none}.rs-control{position:relative;outline:0 none}.rs-container{position:relative}.rs-control *,.rs-control :after,.rs-control :before{-webkit-box-sizing:border-box;box-sizing:border-box}.rs-animation .rs-transition{transition:all .5s linear 0s}.rs-bar{-webkit-transform-origin:100% 50%;-ms-transform-origin:100% 50%;transform-origin:100% 50%}.rs-control .rs-overlay1,.rs-control .rs-overlay2,.rs-control .rs-split .rs-path{-webkit-transform-origin:50% 100%;-ms-transform-origin:50% 100%;transform-origin:50% 100%}.rs-control .rs-overlay{-webkit-transform-origin:100% 100%;-ms-transform-origin:100% 100%;transform-origin:100% 100%}.rs-rounded .rs-seperator,.rs-split .rs-path{-webkit-background-clip:padding-box;background-clip:padding-box}.rs-disabled{opacity:.35}.rs-inner-container{height:100%;width:100%;position:absolute;top:0;overflow:hidden}.rs-control .rs-quarter div.rs-block{height:200%;width:200%}.rs-control .rs-half.rs-bottom div.rs-block,.rs-control .rs-half.rs-top div.rs-block{height:200%;width:100%}.rs-control .rs-half.rs-left div.rs-block,.rs-control .rs-half.rs-right div.rs-block{height:100%;width:200%}.rs-control .rs-bottom .rs-block{top:auto;bottom:0}.rs-control .rs-right .rs-block{right:0}.rs-block.rs-outer{border-radius:1000px}.rs-block{height:100%;width:100%;display:block;position:absolute;top:0;overflow:hidden;z-index:3}.rs-block .rs-inner{border-radius:1000px;display:block;height:100%;width:100%;position:relative}.rs-overlay{width:50%}.rs-overlay1,.rs-overlay2{width:100%}.rs-overlay,.rs-overlay1,.rs-overlay2{position:absolute;background-color:#fff;z-index:3;top:0;height:50%}.rs-bar{display:block;position:absolute;bottom:0;height:0;z-index:10}.rs-bar.rs-rounded{z-index:5}.rs-bar .rs-seperator{height:0;display:block;float:left}.rs-bar:not(.rs-rounded) .rs-seperator{border-left:none;border-right:none}.rs-bar.rs-start .rs-seperator{border-top:none}.rs-bar.rs-end .rs-seperator{border-bottom:none}.rs-bar.rs-start.rs-rounded .rs-seperator{border-radius:0 0 1000px 1000px}.rs-bar.rs-end.rs-rounded .rs-seperator{border-radius:1000px 1000px 0 0}.rs-full .rs-bar,.rs-half .rs-bar{width:50%}.rs-half.rs-left .rs-bar,.rs-half.rs-right .rs-bar,.rs-quarter .rs-bar{width:100%}.rs-full .rs-bar,.rs-half.rs-left .rs-bar,.rs-half.rs-right .rs-bar{top:50%}.rs-bottom .rs-bar{top:0}.rs-half.rs-right .rs-bar,.rs-quarter.rs-right .rs-bar{right:100%}.rs-handle.rs-move{cursor:move}.rs-readonly .rs-handle.rs-move{cursor:default}.rs-classic-mode .rs-path{display:block;height:100%;width:100%}.rs-split .rs-path{border-radius:1000px 1000px 0 0;overflow:hidden;height:50%;position:absolute;top:0;z-index:2}.rs-control .rs-svg-container{display:block;position:absolute;top:0}.rs-control .rs-bottom .rs-svg-container{top:auto;bottom:0}.rs-control .rs-right .rs-svg-container{right:0}.rs-tooltip{position:absolute;cursor:default;border:1px solid transparent;z-index:10}.rs-full .rs-tooltip{top:50%;left:50%}.rs-bottom .rs-tooltip{top:0}.rs-top .rs-tooltip{bottom:0}.rs-right .rs-tooltip{left:0}.rs-left .rs-tooltip{right:0}.rs-half.rs-bottom .rs-tooltip,.rs-half.rs-top .rs-tooltip{left:50%}.rs-half.rs-left .rs-tooltip,.rs-half.rs-right .rs-tooltip{top:50%}.rs-tooltip .rs-input{outline:0 none;border:none;background:0 0}.rs-tooltip-text{font-family:verdana;font-size:13px;border-radius:7px;text-align:center;color:inherit}.rs-tooltip.rs-edit{padding:5px 8px}.rs-tooltip.rs-edit:hover,.rs-tooltip.rs-hover{border:1px solid #aaa;cursor:pointer}.rs-readonly .rs-tooltip.rs-edit:hover{border-color:transparent;cursor:default}.rs-tooltip.rs-center{margin:0!important}.rs-half.rs-bottom .rs-tooltip.rs-center,.rs-half.rs-top .rs-tooltip.rs-center{transform:translate(-50%,0)}.rs-half.rs-left .rs-tooltip.rs-center,.rs-half.rs-right .rs-tooltip.rs-center{transform:translate(0,-50%)}.rs-full .rs-tooltip.rs-center{transform:translate(-50%,-50%)}.rs-tooltip.rs-reset{margin:0!important;top:0!important;left:0!important}.rs-handle{border-radius:1000px;outline:0 none;float:left}.rs-handle.rs-handle-square{border-radius:0}.rs-handle-dot{border:1px solid #aaa;padding:6px}.rs-handle-dot:after{display:block;content:\"\";border:1px solid #aaa;height:100%;width:100%;border-radius:1000px}.rs-seperator{border:1px solid #aaa}.rs-border{border:1px solid #aaa}.rs-path-color{background-color:#fff}.rs-range-color{background-color:#54bbe0}.rs-bg-color{background-color:#fff}.rs-handle{background-color:#838383}.rs-handle-dot{background-color:#fff}.rs-handle-dot:after{background-color:#838383}.rs-path-inherited .rs-path{opacity:.2}.rs-svg-mode .rs-path{stroke:#fff}.rs-svg-mode .rs-range{stroke:#54bbe0}.rs-svg-mode .rs-border{stroke:#aaa}", map: undefined, media: undefined })
+,inject("data-v-55b9423d_1", { source: ".rs-handle{background-color:#f3f3f3;box-shadow:0 0 4px 0 #000}.rs-tooltip-text{font-size:26px;font-weight:500;font-family:Avenir,Tahoma,Verdana,sans-serif}.rs-animation .rs-transition{transition:all .5s ease-in-out 0s}.rs-tooltip.rs-edit:hover,.rs-tooltip.rs-hover{border:1px solid #cacaca}", map: undefined, media: undefined });
 
   };
   /* scoped */
@@ -438,44 +444,27 @@ var __vue_staticRenderFns__ = [];
     undefined
   );
 
-// Import vue component
+// Install the components
+function install(Vue) {
+  Vue.component("round-slider", __vue_component__);
+}
 
-// install function executed by Vue.use()
-var install = function installRoundSlider(Vue) {
-  if (install.installed) { return; }
-  install.installed = true;
-  Vue.component('RoundSlider', __vue_component__);
-};
+/* -- Plugin definition & Auto-install -- */
+/* You shouldn't have to modify the code below */
 
-// Create module definition for Vue.use()
-var plugin = {
-  // eslint-disable-next-line no-undef
-  version: "1.0.1",
-  name: __vue_component__.name,
-  install: install,
-};
-// eslint-disable-next-line no-undef
-__vue_component__.version = "1.0.1";
+// Plugin
+var plugin = { install: install };
 
-// To auto-install on non-es builds, when vue is found
-// eslint-disable-next-line no-redeclare
-/* global window, global */
+// Auto-install
 var GlobalVue = null;
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   GlobalVue = window.Vue;
-} else if (typeof global !== 'undefined') {
+} else if (typeof global !== "undefined") {
   GlobalVue = global.Vue;
 }
 if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-// Inject install function into component - allows component
-// to be registered via Vue.use() as well as Vue.component()
-__vue_component__.install = install;
-
-// It's possible to expose named exports when writing components that can
-// also be used as directives, etc. - eg. import { RollupDemoDirective } from 'rollup-demo';
-// export const RollupDemoDirective = component;
-
-export default __vue_component__;
+export default plugin;
+export { __vue_component__ as RoundSlider, install };
